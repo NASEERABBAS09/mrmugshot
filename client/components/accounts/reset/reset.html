@@ -1,0 +1,26 @@
+<section class="full-page-cover login-page">
+  <div class="wrapper row v-align-item">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>SET NEW PASSWORD</h5>
+        </div>
+        <div class="ibox-content">
+          <form class="form-horizontal" ng-submit="resetCtrl.setNewPassword()">
+            <div class="form-group">
+              <div class="col-md-12">
+                <input placeholder="New password" class="form-control" type="password" ng-model="resetCtrl.newPassword" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-12">
+                <button class="btn btn-sm btn-primary btn-f-w" type="submit">Reset Password</button>
+              </div>
+              <div class="col-md-12"><a ui-sref="login">Back To Login</a></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

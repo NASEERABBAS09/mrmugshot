@@ -1,0 +1,84 @@
+
+<div class="row settings-page animated fadeInRight">
+  <div class="col-md-4 col-md-offset-1 setting-forms">
+    <form role="form" ng-submit="adminSetsCtrl.changeAdminPassword()">
+      <div class="form-group m-b-lg">
+        <strong>Change your password</strong>
+      </div>
+      <div class="form-group">
+        <label>Old password</label>
+        <input ng-model="adminSetsCtrl.admin.oldPassword" placeholder="Enter old password" class="form-control" type="password" required>
+      </div>
+      <div class="form-group">
+        <label>New password</label>
+        <input ng-model="adminSetsCtrl.admin.newPassword" placeholder="Enter new password" class="form-control" type="password" required>
+      </div>
+      <div class="form-group">
+        <label>Confirm new password</label>
+        <input ng-model="adminSetsCtrl.admin.confirmNewPassword" placeholder="Confirm new password" class="form-control" type="password" required>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-sm btn-primary btn-f-w" type="submit">Change password</button>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="col-md-4 col-md-offset-2 setting-forms">
+    <div class="form-group m-b-lg">
+      <strong>Terms and Privacy</strong>
+    </div>
+    <div class="form-group">
+      <label>User Terms of Service</label>
+      <div class="input-group">
+        <input class="form-control" type="text" ng-model="adminSetsCtrl.getTermsPrivacy('user-terms').fileName" disabled=""> 
+        <span class="input-group-btn"> 
+          <button type="button" class="btn btn-primary btn-w-m" ngf-select ngf-change="adminSetsCtrl.attachFile($files, 'user-terms')" ngf-pattern="'.pdf'" accept=".pdf">Upload</button> 
+        </span>
+        <span class="input-group-btn"> 
+          <button type="button" class="btn btn-warning btn-w-m" ng-click="adminSetsCtrl.downloadFile('user-terms');">Download</button> 
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>User Privacy Policy</label>
+      <div class="input-group">
+        <input class="form-control" type="text" ng-model="adminSetsCtrl.getTermsPrivacy('user-privacy').fileName" disabled=""> 
+        <span class="input-group-btn"> 
+          <button type="button" class="btn btn-primary btn-w-m" ngf-select ngf-change="adminSetsCtrl.attachFile($files, 'user-privacy')" ngf-pattern="'.pdf'" accept=".pdf">Upload</button> 
+        </span>
+        <span class="input-group-btn"> 
+          <button type="button" class="btn btn-warning btn-w-m" ng-click="adminSetsCtrl.downloadFile('user-privacy');">Download</button> 
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Sheriff Terms of Service</label>
+      <div class="input-group">
+        <input class="form-control" type="text" ng-model="adminSetsCtrl.getTermsPrivacy('sheriff-terms').fileName" disabled=""> 
+        <span class="input-group-btn"> 
+          <button type="button" class="btn btn-primary btn-w-m" ngf-select ngf-change="adminSetsCtrl.attachFile($files, 'sheriff-terms')" ngf-pattern="'.pdf'" accept=".pdf">Upload</button> 
+        </span>
+        <span class="input-group-btn"> 
+          <button type="button" class="btn btn-warning btn-w-m" ng-click="adminSetsCtrl.downloadFile('sheriff-terms');">Download</button> 
+        </span>
+      </div>
+    </div>
+  </div> -->
+  <div class="col-md-4 col-md-offset-2 setting-forms">
+    <form role="form" ng-submit="adminSetsCtrl.setPrice()">
+      <div class="form-group m-b-lg">
+        <strong>Set Price</strong>
+      </div>
+      <div class="form-group">
+        <label>Set subscription price $ per year</label>
+        <input ng-model="adminSetsCtrl.mugshotPrice.perYear" placeholder="Enter subscription price" class="form-control" type="number" step="any" required>
+      </div>
+      <div class="form-group">
+        <label>Set mugshot purchase price</label>
+        <input ng-model="adminSetsCtrl.mugshotPrice.perMugshot" placeholder="Enter mugshot purchase price" class="form-control" type="number" step="any"  required>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-sm btn-primary btn-f-w" type="submit">Set price</button>
+      </div>
+    </form>
+  </div>
+</div>

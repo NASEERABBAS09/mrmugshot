@@ -1,0 +1,27 @@
+<div class="row upload-mugshot-page">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Upload Mugshots</h5>
+        <submit-btn type="deleteAllUpload"></submit-btn>
+        <submit-btn type="upload"></submit-btn>
+      </div>
+      <div class="ibox-content">
+        <!-- upload photos and csv file -->
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Upload photos</h3>
+            <ld-attachments-btn curr-file-id="sheriffUploadCtrl.currFileId" attachable-type="'mugshot'" text="Images/Zip File" allowed-type="'.zip,.jpg,.jpeg,.png'" number-files="sheriffUploadCtrl.numberFiles"></ld-attachments-btn>
+          </div>
+          <div class="col-md-6">
+            <h3>Upload .CSV file</h3>
+            <ld-attachments-btn curr-file-id="sheriffUploadCtrl.currFileId" attachable-type="'csv'" text="CSV File" allowed-type="'.csv'" number-files="sheriffUploadCtrl.numberFiles"></ld-attachments-btn>
+          </div>
+        </div>
+        <mugshot-items submit-record-id="" type="pending" page="upload" number-files="sheriffUploadCtrl.numberFiles"></mugshot-items>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <progress-modal></progress-modal> -->

@@ -1,0 +1,46 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base             # Packages every Meteor app needs to have
+mobile-experience       # Packages for a great mobile UX
+mongo                   # The database Meteor supports right now
+session                 # Client-side reactive dictionary for your app
+jquery                  # Helpful client-side library
+
+standard-minifiers      # JS/CSS minifiers run for production mode
+es5-shim                # ECMAScript 5 compatibility for older browsers.
+
+angular
+
+
+npm-container
+mquandalle:bower
+meteorhacks:npm
+angularui:angular-ui-router
+twbs:bootstrap
+less
+fortawesome:fontawesome
+angularui:angular-ui-bootstrap
+angular:angular-sanitize
+accounts-base
+angular-meteor-auth
+accounts-password
+check
+momentjs:moment
+alanning:roles
+meteorhacks:ssr
+email
+random
+cfs:standard-packages
+cfs:gridfs
+cfs:s3
+danialf:ng-file-upload
+cfs:ejson-file
+tmeasday:publish-counts
+cfs:graphicsmagick
+http
+lepozepo:s3
+mrt:cron

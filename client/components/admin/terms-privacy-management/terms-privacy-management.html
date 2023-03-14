@@ -1,0 +1,17 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="ibox-title">
+    <h5>{{TermsPriManageCrtl.stringType}}</h5>
+  </div>
+  <div class="ibox-content m-b-sm border-bottom">
+    <div class="row">
+      <div class="col-sm-12">
+        <summernote config="TermsPriManageCrtl.options" ng-model="TermsPriManageCrtl.content"></summernote>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-primary" ng-click="TermsPriManageCrtl.saveContent()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul side-navigation class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="dropdown profile-element text-center" dropdown>
+          <img alt="image" src="/img/avatarAdmin.png" class="avatar-admin" />
+          <!-- <img alt="image" src="{{adminNavCtrl.avatarLink()}}" class="avatar-admin" ng-if="adminNavCtrl.isAdmin"/>
+          <i class="fa fa-star fa-5x avatar-sheriff" ng-if="!adminNavCtrl.isAdmin"></i> -->
+          <a class="dropdown-toggle" dropdown-toggle href>
+            <span class="clear">
+              <span class="block m-t-xs">
+                <strong class="font-bold">{{adminNavCtrl.currentUser.emails[0].address}}</strong>
+              </span>
+            </span>
+          </a>
+        </div>
+        <div class="logo-element">
+          MM
+        </div>
+      </li>
+
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="user-management"><i class="fa fa-users"></i> <span class="nav-label">User Management</span> </a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="sheriff-management"><i class="fa fa-star"></i> <span class="nav-label">Sheriff Management</span> </a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="mugshot-management"><i class="fa fa-picture-o"></i> <span class="nav-label">Mugshot Management</span> </a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="mugshot-approval-list">
+          <i class="fa fa-gavel"></i>
+          <span class="nav-label">Mugshot Approval</span>
+          <span class="label label-warning pull-right">{{adminNavCtrl.numberPending}}</span>
+        </a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="upload-mugshot-admin"><i class="fa fa-cloud-upload"></i> <span class="nav-label">Upload mugshot</span></a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="admin-settings"><i class="fa fa-gear"></i> <span class="nav-label">Settings</span></a>
+      </li>
+      <li ng-if="adminNavCtrl.isAdmin">
+        <a href="/file/sampleCSV-admin.csv" target="new"><i class="fa fa-download"></i> <span class="nav-label">Download sample CSV</span></a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="manage-terms-privacy({type: 'user-terms'})"><i class="fa fa-shield"></i> <span class="nav-label">User Terms</span></a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="manage-terms-privacy({type: 'user-privacy'})"><i class="fa fa-shield"></i> <span class="nav-label">User Privacy</span></a>
+      </li>
+      <li ui-sref-active="active" ng-if="adminNavCtrl.isAdmin">
+        <a ui-sref="manage-terms-privacy({type: 'sheriff-terms'})"><i class="fa fa-shield"></i> <span class="nav-label">Sheriff Terms</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>

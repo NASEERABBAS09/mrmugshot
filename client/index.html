@@ -1,0 +1,31 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+</head>
+
+<body>
+  <!-- Wrapper-->
+  <div id="wrapper">
+    <div ng-if="!$auth.currentUser">
+      <div flash-message="3000" class="flash-message"></div>
+      <div ui-view></div>
+    </div>
+
+    <div ng-if="$auth.currentUser">
+      <!-- Navigation -->
+      <div ui-view name="appNavigation" ></div>
+
+      <!-- Page wraper -->
+      <div id="page-wrapper" class="gray-bg">
+        <div app-top-navbar></div>
+
+        <div flash-message="3000" class="flash-message"></div>
+        <!-- Main view  -->
+        <div ui-view name="appContent"></div>
+
+        <!-- Footer -->
+        <div app-footer></div>
+      </div>
+    </div>
+  </div>
+</body>

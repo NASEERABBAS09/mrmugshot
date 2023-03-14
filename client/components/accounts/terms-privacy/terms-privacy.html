@@ -1,0 +1,35 @@
+<section class="full-page-cover terms-page" ng-if="termsPrivacyCtrl.firstLogin">
+  <div class="wrapper row v-align-item">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content row no-border">
+          <div class="col-md-4 logo">
+            <img class="login-logo" src="img/lawdawgs.png" />
+          </div>
+          <div class="col-md-8 content">
+            <div class="title">
+              <span>
+                Welcome to the Mr. Mugshot Web Portal
+              </span>
+            </div>
+            <div class="notice">
+              <span>
+                By using this application, you agree to the Terms of Service
+              </span>
+            </div>
+            <div class="small-title">
+              <span>
+                Mr.Mugshot Web Portal Terms of Service
+              </span>
+            </div>
+            <div class="terms-privacy-detail" ng-bind-html="termsPrivacyCtrl.trustedContent">
+            </div>
+            <button class="btn btn-sm btn-primary btn-f-w" ng-click="termsPrivacyCtrl.accept()" type="submit">
+              Accept & Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

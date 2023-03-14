@@ -1,0 +1,9 @@
+{
+  "subscribePlan": "basic_plan",
+  "StripePublishableKey": "pk_test_mtVvYM8flDIXvvs6diLSdJCN",
+  "StripeSecretKey": "sk_test_BM747GXPtRs1dxVgTSn0efuj",
+  "AWSAccessKeyId": "AKIAJH6OIRXVYRR5OEDQ",
+  "AWSSecretAccessKey": "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",
+  "AWSBucket": "mr.mugshots-local",
+  "watermarkPath": "/../../../../../private/mr-mugshot-watermark-dark.png"
+}

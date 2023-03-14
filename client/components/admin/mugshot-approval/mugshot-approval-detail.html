@@ -1,0 +1,14 @@
+<div class="row upload-mugshot-page animated fadeInRight">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Mugshot Detail</h5>
+        <submit-btn type="deleteAllApprove" submit-record-id="{{mugshotsApprovalCtrl.recordId}}"></submit-btn>
+        <submit-btn type="approve" submit-record-id="{{mugshotsApprovalCtrl.recordId}}"></submit-btn>
+      </div>
+      <div class="ibox-content">
+        <mugshot-items submit-id="{{mugshotsApprovalCtrl.recordId}}" type="submitted" page="approve"></mugshot-items>
+      </div>
+    </div>
+  </div>
+</div>

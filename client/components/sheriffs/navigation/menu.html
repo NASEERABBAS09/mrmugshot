@@ -1,0 +1,35 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul side-navigation class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="dropdown profile-element text-center" dropdown>
+          <img alt="image" src="/img/avatarAdmin.png" class="avatar-admin" />
+          <!-- <img alt="image" src="{{shffNavCtrl.avatarLink()}}" class="avatar-admin" ng-if="shffNavCtrl.isAdmin"/>
+          <i class="fa fa-star fa-5x avatar-sheriff" ng-if="!shffNavCtrl.isAdmin"></i> -->
+          <a class="dropdown-toggle" dropdown-toggle href>
+            <span class="clear">
+              <span class="block m-t-xs">
+                <strong class="font-bold">{{shffNavCtrl.currentUser.emails[0].address}}</strong>
+              </span>
+            </span>
+          </a>
+        </div>
+        <div class="logo-element">
+          MM
+        </div>
+      </li>
+      <li ui-sref-active="active" ng-if="!shffNavCtrl.isAdmin">
+        <a ui-sref="upload-mugshot"><i class="fa fa-cloud-upload"></i> <span class="nav-label">Upload mugshot</span></a>
+      </li>
+      <li ui-sref-active="active" ng-if="!shffNavCtrl.isAdmin">
+        <a ui-sref="sheriff-settings"><i class="fa fa-gear"></i> <span class="nav-label">Settings</span></a>
+      </li>
+      <li ng-if="!shffNavCtrl.isAdmin">
+        <a href="/file/sampleCSV.csv" target="new"><i class="fa fa-download"></i> <span class="nav-label">Download sample CSV</span></a>
+      </li>
+      <li ui-sref-active="active" ng-if="!shffNavCtrl.isAdmin">
+        <a ui-sref="sheriff-terms"><i class="fa fa-gear"></i> <span class="nav-label">Terms of Service</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>

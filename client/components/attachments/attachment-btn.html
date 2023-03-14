@@ -1,0 +1,4 @@
+<div ngf-drop ngf-select ngf-change="attachmentCtrl.attachFile($files)" ng-disabled="attachmentCtrl.isProgress" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="{{attachmentCtrl.allowedType}}">
+  <span class="drop-text">Drop {{attachmentCtrl.text}} here <br /> or <br /> Click to select</span>
+</div>
+<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>

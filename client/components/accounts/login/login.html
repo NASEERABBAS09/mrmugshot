@@ -1,0 +1,64 @@
+<section class="full-page-cover login-page">
+  <div class="wrapper row v-align-item">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content row no-border">
+          <div class="col-md-4 login-form">
+            <img class="login-logo" src="img/lawdawgs.png">
+          </div>
+          <div class="col-md-8 admin-login-form login-form" ng-if="loginCtrl.loginForm === 'login'">
+            <form class="form-horizontal" ng-submit="loginCtrl.userLogin()">
+              <div class="form-group">
+                <div class="col-md-10 pull-right">
+                  Enter email & password to access the site
+                </div>
+              </div>
+              <div class="error-message text-danger pull-right">
+                {{loginCtrl.errorMessage}}
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 pull-right">
+                  <input ng-model="loginCtrl.user.email" placeholder="Email" class="form-control" type="email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 pull-right">
+                  <input ng-model="loginCtrl.user.password" placeholder="Password" class="form-control" type="password" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 pull-right">
+                  <button class="btn btn-sm btn-primary btn-f-w" type="submit">Login</button>
+                </div>
+                <div class="col-md-10 pull-right text-left"><a href="/" ng-click="loginCtrl.viewReset()">Forgot Password?</a></div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-8 admin-login-form login-form" ng-if="loginCtrl.loginForm === 'reset'">
+            <form class="form-horizontal" ng-submit="loginCtrl.resetPassword(resetForm.$valid)" name="resetForm">
+              <div class="form-group">
+                <div class="col-md-10 pull-right">
+                  Enter email to reset your password
+                </div>
+              </div>
+              <div class="error-message text-danger pull-right">
+                {{loginCtrl.errorMessage}}
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 pull-right">
+                  <input placeholder="Email" class="form-control" type="email" ng-model="loginCtrl.user.email" ng-disabled="loginCtrl.isSubmiting" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 pull-right">
+                  <button class="btn btn-sm btn-primary btn-f-w" type="submit" ng-disabled="loginCtrl.isSubmiting">Reset Password</button>
+                </div>
+                <div class="col-md-10 pull-right text-left"><a href="/" ng-click="loginCtrl.viewLogin()">Back To Login</a></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,167 @@
+<div class="mugshot-items" infinite-scroll='mugshotItemsCtrl.loadMore()' infinite-scroll-distance='1'>
+  <!-- item -->
+  <div class="mugshot-item" data-fileid="{{mugshot.fileOriginal._id}}" data-id="{{mugshot._id}}" ng-keyup="mugshotItemsCtrl.checkValid(mugshot._id)" ng-repeat="mugshot in mugshotItemsCtrl.mugshots;" ng-if="$index < (mugshotItemsCtrl.currScroll * 5)">
+    <!-- bo track id khong tu cap nhat CSV -->
+    <div class="row" id="row-{{mugshot._id}}">
+      <div class="col-md-3 item-left">
+        <img class="item-img" id="{{mugshot._id}}-img" src="{{mugshotItemsCtrl.getUrl(mugshot)}}" alt="{{$index}}" />
+        <br/>
+        <br/>
+        <strong class="mugshot-name">
+          {{mugshot.fileName}}
+        </strong>
+        <br/>
+        <br/>
+        <!-- <div class="progress progress-small" ng-if="mugshot.file.uploadProgress() != 100">
+          <div class="progress-bar" style="width: {{mugshot.file.uploadProgress()}}%;">
+          </div>
+        </div> -->
+        <button class="btn btn-primary col-md-5 col-md-offset-1" id="{{mugshot._id}}-approveBtn" ng-click="mugshotItemsCtrl.approve(mugshot._id)" ng-if="mugshotItemsCtrl.checkValidApproveItem(mugshot._id)" type="button">
+          Approve
+        </button>
+        <button class="btn btn-primary col-md-5 col-md-offset-1" id="{{mugshot._id}}-submitBtn" ng-click="mugshotItemsCtrl.submit(mugshot._id)" ng-if="mugshotItemsCtrl.checkValidSubmitItem(mugshot._id)" type="button">
+          Submit
+        </button>
+        <button class="btn btn-danger col-md-5 {{mugshotItemsCtrl.checkPage()}}" id="{{mugshot._id}}-deleteBtn" ng-click="mugshotItemsCtrl.deleteFile(mugshot)" type="button">
+          Delete
+        </button>
+      </div>
+      <div class="col-md-9 item-right">
+        <div class="row">
+          <!-- line 1 -->
+          <div class="col-md-6">
+            <strong>
+              Name
+            </strong>
+            <input class="form-control upmug-input" id="{{mugshot._id}}-name" ng-model="mugshot.name" placeholder="Enter name" type="text" />
+          </div>
+          <div class="col-md-3">
+            <strong>
+              Sex
+            </strong>
+            <select class="form-control m-b upmug-input" id="{{mugshot._id}}-sex" ng-change="mugshotItemsCtrl.checkValid(mugshot._id)" ng-model="mugshot.sex">
+              <option value="">
+                Select sex
+              </option>
+              <option value="Male">
+                Male
+              </option>
+              <option value="Female">
+                Female
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <strong>
+              Race
+            </strong>
+            <input class="form-control upmug-input" id="{{mugshot._id}}-race" ng-model="mugshot.race" placeholder="Enter race" type="text" />
+          </div>
+          <!-- line 2 -->
+          <div class="col-md-4">
+            <strong>
+              DOB
+            </strong>
+            <div class="input-group date upmug-input" ng-init="dob = (mugshot.dob | date:'M/d/yyyy')">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar">
+                </i>
+              </span>
+              <input class="form-control" datetime="M/d/yyyy" id="{{mugshot._id}}-dob" ng-change="mugshotItemsCtrl.checkValid(mugshot._id)" ng-model="dob" type="text" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <strong>
+              State of Birth
+            </strong>
+            <input class="form-control upmug-input" id="{{mugshot._id}}-stateOfBirth" ng-model="mugshot.stateOfBirth" placeholder="Enter state of birth" type="text" />
+          </div>
+          <div class="col-md-4">
+            <strong>
+              City of Birth
+            </strong>
+            <input class="form-control upmug-input" id="{{mugshot._id}}-cityOfBirth" ng-model="mugshot.cityOfBirth" placeholder="Enter city of birth" type="text" />
+          </div>
+          <!-- line 3 -->
+          <div class="col-md-4">
+            <strong>
+              Booked Date
+            </strong>
+            <div class="input-group date upmug-input" ng-init="bookedDate = (mugshot.bookedDate | date:'M/d/yyyy')">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar">
+                </i>
+              </span>
+              <input class="form-control" datetime="M/d/yyyy" id="{{mugshot._id}}-bookedDate" ng-change="mugshotItemsCtrl.checkValid(mugshot._id)" ng-model="bookedDate" type="text" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <strong>
+              Released Date
+            </strong>
+            <div class="input-group date upmug-input" ng-init="releasedDate = (mugshot.releasedDate | date:'M/d/yyyy')">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar">
+                </i>
+              </span>
+              <input class="form-control" datetime="M/d/yyyy" id="{{mugshot._id}}-releasedDate" ng-change="mugshotItemsCtrl.checkValid(mugshot._id)" ng-model="releasedDate" type="text" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <strong>
+              Approved Date
+            </strong>
+            <div class="input-group date upmug-input" ng-init="approvedDate = (mugshot.approvedAt | date:'M/d/yyyy')">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar">
+                </i>
+              </span>
+              <input class="form-control" datetime="M/d/yyyy" id="{{mugshot._id}}-approvedDate" ng-change="mugshotItemsCtrl.checkValid(mugshot._id)" ng-model="approvedDate" type="text" />
+            </div>
+          </div>
+          <!-- line 4 -->
+          <div ng-if="(mugshotItemsCtrl.page == 'approve') || (mugshotItemsCtrl.isAdmin)">
+            <div class="col-md-3">
+              <strong>
+              Agency Name
+            </strong>
+              <select class="form-control m-b upmug-input" id="{{mugshot._id}}-agencyName" ng-model="mugshot.agencyName" ng-change="mugshotItemsCtrl.checkValid(mugshot._id);" ng-options="agencyName for agencyName in mugshotItemsCtrl.agencyNameList track by agencyName">
+                <option value="">Select Agency Name</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <strong>
+              Agency Person
+            </strong>
+              <select class="form-control m-b upmug-input" id="{{mugshot._id}}-agencyPerson" ng-model="mugshot.agencyPerson" ng-change="mugshotItemsCtrl.checkValid(mugshot._id);" ng-options="agencyPerson for agencyPerson in mugshotItemsCtrl.agencyPersonList track by agencyPerson">
+                <option value="">Select Agency Person</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <strong>State</strong>
+              <select class="form-control m-b upmug-input" id="{{mugshot._id}}-state" ng-model="mugshot.state" ng-change="mugshot.county = ''; mugshotItemsCtrl.checkValid(mugshot._id)">
+                <option value="">Select State</option>
+                <option ng-repeat="state in mugshotItemsCtrl.stateList" value="{{state.abbreviation}}">{{state.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <strong>County</strong>
+              <select class="form-control m-b upmug-input" id="{{mugshot._id}}-county" ng-model="mugshot.county" ng-change="mugshotItemsCtrl.checkValid(mugshot._id);">
+                <option value="">Select County</option>
+                <option ng-repeat="county in mugshotItemsCtrl.getCountyList(mugshot.state)" value="{{county.SPostal}}-{{county.SFIPS}}-{{county.CFIPS}}">{{county.CountyName}}</option>
+              </select>
+            </div>
+          </div>
+          <!-- line 5 -->
+          <div class="col-md-12" style="margin-top: 10px;">
+            <strong>
+              Charge Description
+            </strong>
+            <textarea class="form-control upmug-input upmug-description" id="{{mugshot._id}}-chargeDescription" ng-model="mugshot.chargeDescription" placeholder="Enter charge description">
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

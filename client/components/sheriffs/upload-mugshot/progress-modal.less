@@ -1,0 +1,52 @@
+#progress-overlay {
+  background-color: white;
+  opacity: 0.95;
+  margin: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.progress-pane {
+  border-radius: 6px;
+  height: 180px;
+  width: 280px;
+  position: fixed;
+  bottom: 45%;
+  left: 50%;
+  margin-left: -134px;
+  margin-top: -74px;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  color: #FFF;
+  padding: 25px;
+}
+
+#progress-pane-uploading {
+  background-color: #337ab7;
+}
+
+#progress-pane-success {
+  background-color: #1ab394;
+  .check-icon {
+    font-size: 6em;
+  }
+}
+
+.progress-text {
+  font-size: 2em;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sk-spinner-circle.sk-spinner {
+  width: 75px !important;
+  height: 75px !important;
+}
+
+.sk-spinner-circle .sk-circle:before {
+  background-color: #FFF !important;
+}

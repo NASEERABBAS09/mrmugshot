@@ -1,0 +1,357 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="ibox-title">
+    <h5 ng-click="mugshotManagementCtrl.stopSub()">Mugshot Management</h5>
+  </div>
+  <div class="ibox-content m-b-sm border-bottom">
+    <div class="row">
+      <div class="col-sm-3">
+        <label class="control-label">State:</label>
+        <select class="form-control m-b upmug-input" name="stateSheriff" id="stateSheriff" ng-model="mugshotManagementCtrl.selectedState">
+          <option value="">Select State</option>
+          <option ng-repeat="state in mugshotManagementCtrl.stateList" value="{{state.abbreviation}}">{{state.name}}</option>
+        </select>
+      </div>
+      <div class="col-sm-3">
+        <label class="control-label">County:</label>
+        <select class="form-control m-b upmug-input" name="countySheriff" id="countySheriff" ng-model="mugshotManagementCtrl.selectedCounty">
+          <option value="">Select County</option>
+          <option ng-repeat="county in mugshotManagementCtrl.countyList" value="{{county.SPostal}}-{{county.SFIPS}}-{{county.CFIPS}}">{{county.CountyName}}</option>
+        </select>
+      </div>
+      <div class="col-sm-3">
+        <label class="control-label">Upload From:</label>
+        <div class="input-group date upmug-input">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          <input class="form-control" type="text" ng-model="mugshotManagementCtrl.uploadFromDate" />
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <label class="control-label">To:</label>
+        <div class="input-group date upmug-input">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          <input class="form-control" type="text" ng-model="mugshotManagementCtrl.uploadToDate" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-search"></i></div>
+              <input type="text" class="form-control" placeholder="Search mugshot by county, name, charge ..." ng-model="mugshotManagementCtrl.query">
+            </div>
+          </div>
+          <table id="tableMugshots" class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>
+                  <div>Thumbnail</div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'state'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    State
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'state' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'state' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'countyName'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    County
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'countyName' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'countyName' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'name'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    Name
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'name' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'name' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'chargeDescription'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    Charge
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'chargeDescription' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'chargeDescription' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'bookedDate'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    Booked date
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'bookedDate' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'bookedDate' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'updatedAt'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    Approved date
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'updatedAt' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'updatedAt' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'singlePurchase'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    # of single purchase
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'singlePurchase' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'singlePurchase' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'agencyName'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    Agency name
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'agencyName' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'agencyName' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div ng-click="mugshotManagementCtrl.sortType = 'agencyPerson'; mugshotManagementCtrl.sortReverse = !mugshotManagementCtrl.sortReverse">
+                    Agency person
+                    <i ng-show="!mugshotManagementCtrl.sortType" class="fa fa-sort"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'agencyPerson' && !mugshotManagementCtrl.sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show="mugshotManagementCtrl.sortType == 'agencyPerson' && mugshotManagementCtrl.sortReverse" class="fa fa-caret-up"></i>
+                  </div>
+                </th>
+                <th>
+                  <div>
+                    Action
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-show="mugshotManagementCtrl.inSubscription">
+                <td colspan=11 style="text-align: center;">
+                  <img alt="loading" src="/img/loading.gif" />
+                </td>
+              </tr>
+              <tr ng-repeat="mugshot in mugshotManagementCtrl.mugshots" ng-show="!mugshotManagementCtrl.inSubscription">
+                <td>
+                  <div class="center-text mm-has-watermark">
+                    <img id="{{mugshot._id}}-img-thumb" alt="{{mugshot.name}}" src="{{mugshotManagementCtrl.getUrlThumb(mugshot)}}" class="thumbnail-mugshot-management" data-toggle="modal" data-target="#modal-mugshot-detail" ng-click="mugshotManagementCtrl.setCurrMugshot(mugshot)" style="cursor:pointer" />
+                    <!-- <img src="{{mugshotManagementCtrl.showWaterMark(mugshot)}}" class="watermark" /> -->
+                  </div>
+                </td>
+                <td>{{mugshot.state}}</td>
+                <td>{{mugshot.countyName}}</td>
+                <td data-toggle="modal" data-target="#modal-mugshot-detail" ng-click="mugshotManagementCtrl.setCurrMugshot(mugshot)" style="cursor:pointer">{{mugshot.name}}</td>
+                <td>{{mugshot.chargeDescription}}</td>
+                <td>{{mugshot.bookedDate | date:"M/d/yyyy"}}</td>
+                <td>{{mugshot.approvedAt | date:"M/d/yyyy"}}</td>
+                <td style="text-align: center;">{{mugshot.singlePurchase}}</td>
+                <td>{{mugshot.agencyName}}</td>
+                <td>{{mugshot.agencyPerson}}</td>
+                <td><a href="#" ng-click="mugshotManagementCtrl.setTogleAction(mugshot)" ng-class="{enable: mugshot.action == 'disable'}">{{(mugshot.action == 'disable') ? 'Enable' : 'Disable'}}</a> <a href="#" ng-click="mugshotManagementCtrl.deleteMugshot(mugshot._id, mugshot.fileOriginal._id)">Delete</a></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="11">
+                  <div class="pull-left">
+                    <select class="form-control" ng-model="mugshotManagementCtrl.itemsPerPage" ng-options="('show '+size+' mugshots per page') for size in mugshotManagementCtrl.pageSizes"></select>
+                  </div>
+                  <div class="text-center">
+                    <ul class="pagination">
+                      <li ng-class="{disabled: mugshotManagementCtrl.currentPage == 0}">
+                        <a href="javascript:;" ng-click="mugshotManagementCtrl.prevPage()">« Prev</a>
+                      </li>
+                      <li ng-class="active">
+                        <a href="javascript:;">{{mugshotManagementCtrl.currentPage + 1}}</a>
+                      </li>
+                      <li ng-class="{disabled: mugshotManagementCtrl.currentPage == mugshotManagementCtrl.numberPage.length - 1}">
+                        <a href="javascript:;" ng-click="mugshotManagementCtrl.nextPage()">Next »</a>
+                      </li>
+                    </ul>
+                    <div class="pull-right">
+                      <p>Go to page: </p>
+                      <select class="form-control" ng-model="mugshotManagementCtrl.currentPage" ng-options="(page + 1) for page in mugshotManagementCtrl.numberPage"></select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- code for create rooms modal -->
+<div style="display: none;" class="modal inmodal fade" id="modal-mugshot-detail" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Mugshot Detail</h4>
+      </div>
+      <div class="modal-body">
+        <div class="mugshot-items">
+          <!-- item -->
+          <div class="mugshot-item" data-id={{mugshotManagementCtrl.currMugshot._id}} data-fileid={{mugshotManagementCtrl.currMugshot.fileOriginal._id}}>
+            <div class="row">
+              <div class="col-md-3 item-left md-has-watermark">
+                <img id="{{mugshotManagementCtrl.currMugshot._id}}-img" src="{{mugshotManagementCtrl.getUrl(mugshotManagementCtrl.currMugshot)}}" class="item-img" alt="{{mugshotManagementCtrl.currMugshot.fileName}}" />
+                <!-- <img src="/img/mr-mugshot-watermark-dark.png" class="watermark" /> -->
+                <br />
+                <br />
+                <strong>{{mugshotManagementCtrl.currMugshot.fileName}}</strong>
+              </div>
+              <div class="col-md-9 item-right">
+                <div class="row">
+                  <!-- line 1 -->
+                  <div class="col-md-6">
+                    <strong>
+                      Name
+                    </strong>
+                    <input class="form-control upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-name" ng-model="mugshotManagementCtrl.currMugshot.name" placeholder="Enter name" type="text"/>
+                  </div>
+                  <div class="col-md-3">
+                    <strong>
+                      Sex
+                    </strong>
+                    <select class="form-control m-b upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-sex" ng-model="mugshotManagementCtrl.currMugshot.sex">
+                      <option value="">
+                        Select sex
+                      </option>
+                      <option value="Male">
+                        Male
+                      </option>
+                      <option value="Female">
+                        Female
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <strong>
+                      Race
+                    </strong>
+                    <input class="form-control upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-race" ng-model="mugshotManagementCtrl.currMugshot.race" placeholder="Enter race" type="text"/>
+                  </div>
+                  <!-- line 2 -->
+                  <div class="col-md-4">
+                    <strong>
+                      DOB
+                    </strong>
+                    <div class="input-group date upmug-input">
+                      <span class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                      </span>
+                      <input class="form-control" datetime="M/d/yyyy" id="{{mugshotManagementCtrl.currMugshot._id}}-dob" ng-model="mugshotManagementCtrl.currDate.dob" type="text"/>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <strong>
+                      State of Birth
+                    </strong>
+                    <input class="form-control upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-stateOfBirth" ng-model="mugshotManagementCtrl.currMugshot.stateOfBirth" placeholder="Enter state of birth" type="text"/>
+                  </div>
+                  <div class="col-md-4">
+                    <strong>
+                      City of Birth
+                    </strong>
+                    <input class="form-control upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-cityOfBirth" ng-model="mugshotManagementCtrl.currMugshot.cityOfBirth" placeholder="Enter city of birth" type="text"/>
+                  </div>
+                  <!-- line 3 -->
+                  <div class="col-md-4">
+                    <strong>
+                      Booked Date
+                    </strong>
+                    <div class="input-group date upmug-input">
+                      <span class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                      </span>
+                      <input class="form-control" datetime="M/d/yyyy" id="{{mugshotManagementCtrl.currMugshot._id}}-bookedDate" ng-model="mugshotManagementCtrl.currDate.bookedDate" type="text"/>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <strong>
+                      Released Date
+                    </strong>
+                    <div class="input-group date upmug-input">
+                      <span class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                      </span>
+                      <input class="form-control" datetime="M/d/yyyy" id="{{mugshotManagementCtrl.currMugshot._id}}-releasedDate" ng-model="mugshotManagementCtrl.currDate.releasedDate" type="text"/>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <strong>
+                      Approved Date
+                    </strong>
+                    <div class="input-group date upmug-input">
+                      <span class="input-group-addon">
+                        <i class="fa fa-calendar">
+                        </i>
+                      </span>
+                      <input class="form-control" datetime="M/d/yyyy" id="{{mugshotManagementCtrl.currMugshot._id}}-approvedDate" ng-model="mugshotManagementCtrl.currDate.approvedAt" type="text"/>
+                    </div>
+                  </div>
+                  <!-- line 4 -->
+                  <div class="col-md-3">
+                    <strong>
+                      Agency Name
+                    </strong>
+                    <select class="form-control m-b upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-agencyName" ng-model="mugshotManagementCtrl.currMugshot.agencyName" ng-options="agencyName for agencyName in mugshotManagementCtrl.agencyNameList track by agencyName">
+                      <option value="">Select Agency Name</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <strong>
+                      Agency Person
+                    </strong>
+                    <select class="form-control m-b upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-agencyPerson" ng-model="mugshotManagementCtrl.currMugshot.agencyPerson" ng-options="agencyPerson for agencyPerson in mugshotManagementCtrl.agencyPersonList track by agencyPerson">
+                      <option value="">Select Agency Name</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label class="control-label">State</label>
+                    <select class="form-control m-b upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-state" ng-model="mugshotManagementCtrl.currMugshot.state" ng-change="mugshotManagementCtrl.loadCounty(mugshot._id);">
+                      <option value="">Select State</option>
+                      <option ng-repeat="state in mugshotManagementCtrl.stateList" value="{{state.abbreviation}}">{{state.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label class="control-label">County</label>
+                    <select class="form-control m-b upmug-input" id="{{mugshotManagementCtrl.currMugshot._id}}-county" ng-model="mugshotManagementCtrl.currMugshot.county">
+                      <option value="">Select County</option>
+                      <option ng-repeat="county in mugshotManagementCtrl.getCountyList(mugshotManagementCtrl.currMugshot.state)" value="{{county.SPostal}}-{{county.SFIPS}}-{{county.CFIPS}}">{{county.CountyName}}</option>
+                    </select>
+                  </div>
+                  <!-- line 5 -->
+                  <div class="col-md-12" style="margin-top: 10px;">
+                    <strong>
+                      Charge Description
+                    </strong>
+                    <textarea class="form-control upmug-input upmug-description" id="{{mugshotManagementCtrl.currMugshot._id}}-chargeDescription" ng-model="mugshotManagementCtrl.currMugshot.chargeDescription" placeholder="Enter charge description">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="mugshotManagementCtrl.deleteMugshot(mugshotManagementCtrl.currMugshot._id, mugshotManagementCtrl.currMugshot.fileOriginal._id);">Delete</button>
+        <button type="button" class="btn btn-primary" ng-click="mugshotManagementCtrl.saveMugshot(mugshotManagementCtrl.currMugshot._id);">Save</button>
+        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <iframe src="http://docs.google.com/gview?url=http://example.com/mypdf.pdf&embedded=true" style="width:718px; height:700px;" frameborder="0"></iframe> -->

@@ -1,0 +1,147 @@
+<div class="wrapper wrapper-content sheriffs-page animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Sheriff Management</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <form name="inviteForm" ng-submit="sheriffMgntCtrl.inviteSheriff(inviteForm.$valid)">
+              <div class="col-sm-11">
+                <div class="input-group input-invite-sheriff">
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <input placeholder="Agency name" class="input-sm form-control" type="text" ng-model="sheriffMgntCtrl.invitedAgencyName" ng-disabled="sheriffMgntCtrl.isSubmiting" required>
+                    </div>
+                    <div class="col-sm-2">
+                      <input placeholder="Agency person" class="input-sm form-control" type="text" ng-model="sheriffMgntCtrl.invitedAgencyPerson" ng-disabled="sheriffMgntCtrl.isSubmiting" required>
+                    </div>
+                    <div class="col-sm-2">
+                      <input placeholder="Sheriff email" class="input-sm form-control" type="email" ng-model="sheriffMgntCtrl.invitedEmail" ng-disabled="sheriffMgntCtrl.isSubmiting" required>
+                    </div>
+                    <div class="col-sm-3">
+                      <select class="form-control m-b upmug-input" name="stateSheriff" id="stateSheriff" ng-model="sheriffMgntCtrl.selectedState" ng-disabled="sheriffMgntCtrl.isSubmiting" required>
+                        <option value="">Select State</option>
+                        <option ng-repeat="state in sheriffMgntCtrl.stateList" value="{{state.abbreviation}}">{{state.name}}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-3">
+                      <select class="form-control m-b upmug-input" name="countySheriff" id="countySheriff" ng-model="sheriffMgntCtrl.selectedCounty" ng-disabled="sheriffMgntCtrl.isSubmiting" required>
+                        <option value="">Select County</option>
+                        <option ng-repeat="county in sheriffMgntCtrl.countyList" value="{{county.SPostal}}-{{county.SFIPS}}-{{county.CFIPS}}">{{county.CountyName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-sm btn-primary" ng-disabled="sheriffMgntCtrl.isSubmiting">Invite!</button>
+                </span>
+              </div>
+            </form>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>
+                    <div ng-click="sheriffMgntCtrl.sortType = 'profile.agency'; sheriffMgntCtrl.sortReverse = !sheriffMgntCtrl.sortReverse">
+                      Agency Name
+                      <i class="fa fa-sort" ng-show="!sheriffMgntCtrl.sortType">
+                      </i>
+                      <i class="fa fa-caret-down" ng-show="sheriffMgntCtrl.sortType == 'profile.agency' && !sheriffMgntCtrl.sortReverse">
+                      </i>
+                      <i class="fa fa-caret-up" ng-show="sheriffMgntCtrl.sortType == 'profile.agency' && sheriffMgntCtrl.sortReverse">
+                      </i>
+                    </div>
+                  </th>
+                  <th>
+                    <div ng-click="sheriffMgntCtrl.sortType = 'profile.name'; sheriffMgntCtrl.sortReverse = !sheriffMgntCtrl.sortReverse">
+                      Agency Person
+                      <i class="fa fa-sort" ng-show="!sheriffMgntCtrl.sortType">
+                      </i>
+                      <i class="fa fa-caret-down" ng-show="sheriffMgntCtrl.sortType == 'profile.name' && !sheriffMgntCtrl.sortReverse">
+                      </i>
+                      <i class="fa fa-caret-up" ng-show="sheriffMgntCtrl.sortType == 'profile.name' && sheriffMgntCtrl.sortReverse">
+                      </i>
+                    </div>
+                  </th>
+                  <th>
+                    <div ng-click="sheriffMgntCtrl.sortType = 'email'; sheriffMgntCtrl.sortReverse = !sheriffMgntCtrl.sortReverse">
+                      Sheriff Email
+                      <i class="fa fa-sort" ng-show="!sheriffMgntCtrl.sortType">
+                      </i>
+                      <i class="fa fa-caret-down" ng-show="sheriffMgntCtrl.sortType == 'email' && !sheriffMgntCtrl.sortReverse">
+                      </i>
+                      <i class="fa fa-caret-up" ng-show="sheriffMgntCtrl.sortType == 'email' && sheriffMgntCtrl.sortReverse">
+                      </i>
+                    </div>
+                  </th>
+                  <th>
+                    <div ng-click="sheriffMgntCtrl.sortType = 'profile.stateName'; sheriffMgntCtrl.sortReverse = !sheriffMgntCtrl.sortReverse">
+                      State
+                      <i class="fa fa-sort" ng-show="!sheriffMgntCtrl.sortType">
+                      </i>
+                      <i class="fa fa-caret-down" ng-show="sheriffMgntCtrl.sortType == 'profile.stateName' && !sheriffMgntCtrl.sortReverse">
+                      </i>
+                      <i class="fa fa-caret-up" ng-show="sheriffMgntCtrl.sortType == 'profile.stateName' && sheriffMgntCtrl.sortReverse">
+                      </i>
+                    </div>
+                  </th>
+                  <th>
+                    <div ng-click="sheriffMgntCtrl.sortType = 'profile.countyName'; sheriffMgntCtrl.sortReverse = !sheriffMgntCtrl.sortReverse">
+                      County
+                      <i class="fa fa-sort" ng-show="!sheriffMgntCtrl.sortType">
+                      </i>
+                      <i class="fa fa-caret-down" ng-show="sheriffMgntCtrl.sortType == 'profile.countyName' && !sheriffMgntCtrl.sortReverse">
+                      </i>
+                      <i class="fa fa-caret-up" ng-show="sheriffMgntCtrl.sortType == 'profile.countyName' && sheriffMgntCtrl.sortReverse">
+                      </i>
+                    </div>
+                  </th>
+                  <th>
+                    <div ng-click="sheriffMgntCtrl.sortType = 'createdAt'; sheriffMgntCtrl.sortReverse = !sheriffMgntCtrl.sortReverse">
+                      Invited Date
+                      <i class="fa fa-sort" ng-show="!sheriffMgntCtrl.sortType">
+                      </i>
+                      <i class="fa fa-caret-down" ng-show="sheriffMgntCtrl.sortType == 'createdAt' && !sheriffMgntCtrl.sortReverse">
+                      </i>
+                      <i class="fa fa-caret-up" ng-show="sheriffMgntCtrl.sortType == 'createdAt' && sheriffMgntCtrl.sortReverse">
+                      </i>
+                    </div>
+                  </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="sheriff in sheriffMgntCtrl.sheriffs">
+                  <td>
+                    {{sheriff.profile.agency}}
+                  </td>
+                  <td>
+                    {{sheriff.profile.name}}
+                  </td>
+                  <td>
+                    {{sheriff.emails[0].address}}
+                  </td>
+                  <td>
+                    {{sheriff.profile.stateName}}
+                  </td>
+                  <td>
+                    {{sheriff.profile.countyName}}
+                  </td>
+                  <td>
+                    {{sheriff.createdAt | date:'medium'}}
+                  </td>
+                  <td ng-init="sheriffMgntCtrl.hadSubmitted(sheriff._id)"><a ng-click="sheriffMgntCtrl.deleteSheriff(sheriff._id)" ng-if="!sheriff.hadSubmitted">Delete</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
